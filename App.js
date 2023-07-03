@@ -1,20 +1,35 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable } from 'react-native';
+import { View, TextInput, Button, StyleSheet, TouchableOpacity, Text, FlatList} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './components/Home';
+import ProfileScreen from './components/Profile';
+import Layout from './components/Layout';
+const Stack=createNativeStackNavigator();
+//const Tab=createBottomTabNavigator();
 
-export default function App() {
+ const App=()=>{
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Screen name="Profile" component={ProfileScreen } options={{title:"Profile"}} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Layout" component={Layout}/>
+        
+      </Stack.Navigator>
+      {/* <Tab.Navigator initialRouteName='home' >
+        <Tab.Screen name="profile" component={ProfileScreen}/>
+        <Tab.Screen name='home' component={HomeScreen}/>
+      </Tab.Navigator> */}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    </NavigationContainer>
+
+
+  )
+
+ }
+export default App;
